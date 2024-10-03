@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Animated Opacity Example')),
-        body: Center(child: AnimatedTextToggle()),
+        appBar: AppBar(title: const Text('Animated Opacity Example')),
+        body: const Center(child: AnimatedTextToggle()),
       ),
     );
   }
 }
 
 class AnimatedTextToggle extends StatefulWidget {
+  const AnimatedTextToggle({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _AnimatedTextToggleState createState() => _AnimatedTextToggleState();
 }
 
 class _AnimatedTextToggleState extends State<AnimatedTextToggle> {
   bool _isVisible = true;
-  Duration _animationDuration = Duration(seconds: 2);
+  final Duration _animationDuration = const Duration(seconds: 2);
   Curve _animationCurve = Curves.easeInOut;
 
   void _toggleVisibility() {
@@ -41,12 +46,12 @@ class _AnimatedTextToggleState extends State<AnimatedTextToggle> {
           opacity: _isVisible ? 1.0 : 0.0,
           duration: _animationDuration,
           curve: _animationCurve,
-          child: Text(
+          child: const Text(
             'Flutter is Awesome!',
             style: TextStyle(fontSize: 24, color: Colors.blue),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         DropdownButton<Curve>(
           value: _animationCurve,
           onChanged: (Curve? newValue) {
@@ -54,18 +59,18 @@ class _AnimatedTextToggleState extends State<AnimatedTextToggle> {
               _animationCurve = newValue!;
             });
           },
-          items: [
-            DropdownMenuItem(child: Text('Ease In'), value: Curves.easeIn),
-            DropdownMenuItem(child: Text('Ease Out'), value: Curves.easeOut),
-            DropdownMenuItem(child: Text('Ease In Out'), value: Curves.easeInOut),
-            DropdownMenuItem(child: Text('Bounce In'), value: Curves.bounceIn),
-            DropdownMenuItem(child: Text('Bounce Out'), value: Curves.bounceOut),
+          items: const [
+            DropdownMenuItem(value: Curves.easeIn, child: Text('Ease In')),
+            DropdownMenuItem(value: Curves.easeOut, child: Text('Ease Out')),
+            DropdownMenuItem(value: Curves.easeInOut, child: Text('Ease In Out')),
+            DropdownMenuItem(value: Curves.bounceIn, child: Text('Bounce In')),
+            DropdownMenuItem(value: Curves.bounceOut, child: Text('Bounce Out')),
           ],
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         ElevatedButton(
           onPressed: _toggleVisibility,
-          child: Text('Play'),
+          child: const Text('Play'),
         ),
       ],
     );
