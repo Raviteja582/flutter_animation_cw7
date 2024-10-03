@@ -1,58 +1,73 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: FadingTextAnimation(),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Animated Opacity Example')),
+        body: Center(child: AnimatedTextToggle()),
+      ),
     );
   }
 }
 
-class FadingTextAnimation extends StatefulWidget {
-  const FadingTextAnimation({super.key});
-
+class AnimatedTextToggle extends StatefulWidget {
   @override
-  // ignore: library_private_types_in_public_api
-  _FadingTextAnimationState createState() => _FadingTextAnimationState();
+  _AnimatedTextToggleState createState() => _AnimatedTextToggleState();
 }
 
-class _FadingTextAnimationState extends State<FadingTextAnimation> {
+class _AnimatedTextToggleState extends State<AnimatedTextToggle> {
   bool _isVisible = true;
-  void toggleVisibility() {
+  Duration _animationDuration = Duration(seconds: 2);
+  Curve _animationCurve = Curves.easeInOut;
+
+  void _toggleVisibility() {
     setState(() {
       _isVisible = !_isVisible;
     });
   }
 
-  final Duration _animationDuration = const Duration(seconds: 3);
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Fading Text Animation'),
-      ),
-      body: Center(
-        child: AnimatedOpacity(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        AnimatedOpacity(
           opacity: _isVisible ? 1.0 : 0.0,
           duration: _animationDuration,
-          child: const Text(
-            'Hello, Flutter!',
-            style: TextStyle(fontSize: 24),
+          curve: _animationCurve,
+          child: Text(
+            'Flutter is Awesome!',
+            style: TextStyle(fontSize: 24, color: Colors.blue),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: toggleVisibility,
-        child: const Icon(Icons.play_arrow),
-      ),
+        SizedBox(height: 20),
+        DropdownButton<Curve>(
+          value: _animationCurve,
+          onChanged: (Curve? newValue) {
+            setState(() {
+              _animationCurve = newValue!;
+            });
+          },
+          items: [
+            DropdownMenuItem(child: Text('Ease In'), value: Curves.easeIn),
+            DropdownMenuItem(child: Text('Ease Out'), value: Curves.easeOut),
+            DropdownMenuItem(child: Text('Ease In Out'), value: Curves.easeInOut),
+            DropdownMenuItem(child: Text('Bounce In'), value: Curves.bounceIn),
+            DropdownMenuItem(child: Text('Bounce Out'), value: Curves.bounceOut),
+          ],
+        ),
+        SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: _toggleVisibility,
+          child: Text('Play'),
+        ),
+      ],
     );
   }
 }
