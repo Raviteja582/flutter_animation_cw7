@@ -31,6 +31,8 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
     });
   }
 
+  final Duration _animationDuration = const Duration(seconds: 3);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +42,7 @@ class _FadingTextAnimationState extends State<FadingTextAnimation> {
       body: Center(
         child: AnimatedOpacity(
           opacity: _isVisible ? 1.0 : 0.0,
-          duration: const Duration(seconds: 1),
+          duration: _animationDuration,
           child: const Text(
             'Hello, Flutter!',
             style: TextStyle(fontSize: 24),
