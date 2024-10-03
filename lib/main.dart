@@ -82,9 +82,11 @@ class _AnimatedTextToggleState extends State<AnimatedTextToggle>
           items: const [
             DropdownMenuItem(value: Curves.easeIn, child: Text('Ease In')),
             DropdownMenuItem(value: Curves.easeOut, child: Text('Ease Out')),
-            DropdownMenuItem(value: Curves.easeInOut, child: Text('Ease In Out')),
+            DropdownMenuItem(
+                value: Curves.easeInOut, child: Text('Ease In Out')),
             DropdownMenuItem(value: Curves.bounceIn, child: Text('Bounce In')),
-            DropdownMenuItem(value: Curves.bounceOut, child: Text('Bounce Out')),
+            DropdownMenuItem(
+                value: Curves.bounceOut, child: Text('Bounce Out')),
           ],
         ),
         const SizedBox(height: 20),
@@ -114,12 +116,12 @@ class _AnimatedTextToggleState extends State<AnimatedTextToggle>
               child: Container(
                 decoration: BoxDecoration(
                   border: _showFrame
-                      ? Border.all(color: Colors.blue, width: 4.0)
+                      ? Border.all(color: Colors.blue, width: 8.0)
                       : null,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(100),
                 ),
-                child: Image.network(
-                  'https://picsum.photos/200/300',
+                child: Image.asset(
+                  'images/confuse.jpg',
                   width: 150,
                   height: 150,
                 ),
