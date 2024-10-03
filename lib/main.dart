@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 void main() {
   runApp(const MyApp());
@@ -23,6 +22,7 @@ class AnimatedTextToggle extends StatefulWidget {
   const AnimatedTextToggle({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AnimatedTextToggleState createState() => _AnimatedTextToggleState();
 }
 
